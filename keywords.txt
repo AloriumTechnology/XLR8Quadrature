@@ -1,0 +1,25 @@
+#######################################
+# Syntax Coloring Map For XLR8Quadrature
+####################################### 
+# Class
+#######################################
+
+XLR8Quadrature	KEYWORD1
+
+#######################################
+# Methods and Functions 
+#######################################	
+
+disable		KEYWORD2
+enable		KEYWORD2
+sample20ms	KEYWORD2
+sample200ms	KEYWORD2
+reset_count	KEYWORD2
+read_count	KEYWORD2
+read_rate	KEYWORD2
+enabled		KEYWORD2
+
+#######################################
+# Constants
+#######################################
+ 
