@@ -1,5 +1,13 @@
 #include <XLR8Quadrature.h>
 
+/* QuadratureExample
+ Copyright (c) 2015-2016 Alorium Technology.  All rights reserved.
+ by Bryan R. Craker (support@aloriumtech.com) of
+ Alorium Technology (info@aloriumtech.com)
+ Exercises the XLR8Quadrature Library
+ Set serial monitor to 115200 baud
+*/
+
 #define NUM_QUADS 6
 #define LOWEST_PIN 2
 #define HIGHEST_PIN (NUM_QUADS * 2) + LOWEST_PIN
