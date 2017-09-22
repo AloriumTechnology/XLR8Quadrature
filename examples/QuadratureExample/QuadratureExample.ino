@@ -5,6 +5,8 @@
  by Bryan R. Craker (support@aloriumtech.com) of
  Alorium Technology (info@aloriumtech.com)
  Exercises the XLR8Quadrature Library
+ No external hardware is required, this example is an internal 
+   board exercise.
  Set serial monitor to 115200 baud
 */
 
