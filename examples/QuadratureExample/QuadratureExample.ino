@@ -10,7 +10,7 @@
  Set serial monitor to 115200 baud
 */
 
-#define NUM_QUADS 6
+#define NUM_QUADS 5
 #define LOWEST_PIN 2
 #define HIGHEST_PIN (NUM_QUADS * 2) + LOWEST_PIN
 #define NUM_TOGGLES 0xffff
@@ -30,6 +30,8 @@ void setup() {
   // Enable all quads at slow sample speed and set one quad pin continually high
   for (int idx = 0; idx < NUM_QUADS; idx++) {
     quadratures[idx].enable();
+    pinMode(((idx + 1) * 2), OUTPUT);
+    pinMode((((idx + 1) * 2) + 1), OUTPUT);
     digitalWrite((((idx + 1) * 2) + 1), HIGH);
   }
 
@@ -76,7 +78,7 @@ void setup() {
     Serial.print(" toggled ");
     Serial.print(quadratures[idx].read_count());
     Serial.print(" times, ");
-    if (quadratures[idx].read_count() == NUM_TOGGLES + idx) {
+    if (quadratures[idx].read_count() == (NUM_TOGGLES + idx) * 2) {
       Serial.println(" PASSED");
     }
     else {
