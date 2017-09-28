@@ -88,13 +88,13 @@ void XLR8Quadrature::sample200ms() {
 }
 
 // Read the count registers and return as a 32 bit integer
-int32_t XLR8Quadrature::read_count() {
+int32_t XLR8Quadrature::readCount() {
   QECR_ADDR = 0x0F & this->quadratureIndex;
   return (((uint32_t)(QECNT3_ADDR) << 24) | ((uint32_t)(QECNT2_ADDR) << 16) | ((uint32_t)(QECNT1_ADDR) << 8) | (uint32_t)(QECNT0_ADDR));
 }
 
 // Read the rate registers and return as a 32 bit integer
-int32_t XLR8Quadrature::read_rate() {
+int32_t XLR8Quadrature::readRate() {
   QECR_ADDR = 0x0F & this->quadratureIndex;
   return (((uint32_t)(QERAT3_ADDR) << 24) | ((uint32_t)(QERAT2_ADDR) << 16) | ((uint32_t)(QERAT1_ADDR) << 8) | (uint32_t)(QERAT0_ADDR));
 }
@@ -117,3 +117,4 @@ void XLR8Quadrature::update() {
   QECR_ADDR = (quadratures[this->quadratureIndex].settings.enable << QEEN) | (!quadratures[this->quadratureIndex].settings.enable << QEDIS)
     | (0 << QEUP) | (quadratures[this->quadratureIndex].settings.sample_rate << QERS) | (0x0F & this->quadratureIndex);
 }
+

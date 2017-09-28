@@ -41,7 +41,7 @@ void setup() {
       digitalWrite(((idx + 1) * 2), LOW);
       digitalWrite(((idx + 1) * 2), HIGH);
     }
-    slow_rates[idx] = quadratures[idx].read_rate();
+    slow_rates[idx] = quadratures[idx].readRate();
   }
 
   // Disable all quads
@@ -61,7 +61,7 @@ void setup() {
       digitalWrite(((idx + 1) * 2), LOW);
       digitalWrite(((idx + 1) * 2), HIGH);
     }
-    fast_rates[idx] = quadratures[idx].read_rate();
+    fast_rates[idx] = quadratures[idx].readRate();
   }
 
   for (long idx = 0; idx < NUM_QUADS; idx++) {
@@ -76,9 +76,9 @@ void setup() {
     Serial.print("Quadrature ");
     Serial.print(idx);
     Serial.print(" toggled ");
-    Serial.print(quadratures[idx].read_count());
+    Serial.print(quadratures[idx].readCount());
     Serial.print(" times, ");
-    if (quadratures[idx].read_count() == (NUM_TOGGLES + idx) * 2) {
+    if (quadratures[idx].readCount() == (NUM_TOGGLES + idx) * 2) {
       Serial.println(" PASSED");
     }
     else {

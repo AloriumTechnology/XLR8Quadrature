@@ -9,38 +9,41 @@
  This library gives access to a quadrature quadrature on the FPGA 
  fabric of an XLR8 board.
 
- Usage
- The XLR8Quadrature library is included with the line
-   #include <XLR8Quadrature.h>
- It provides access to six quadratures in the FPGA fabric. As 
- quadrature objects are instatiated, they are created sequentially. 
- I.e., the first quadrature object will control quadrature 0 in the 
- fabric, the second will control quadrature 1, etc., through 
- quadrature 5. The quadratures are connected to the physical pins 
- starting with digital pin 2, going through 13, with each quadrature 
- connected to the two sequential pins in order. So, quadrature 0 is 
- tied to pins 2 & 3, quadrature 1 is tied to pins 4 & 5, etc. The 
- simplest way to manage multiple quadratures in an application is to 
- create an array of quadrature objects. So if you instantiate an 
- array like this:
-   Quadrature quadratures[6];
- You will have an array able to access all 6 quadratures in the FPGA. 
- In this example, you can think of the entire layout like this:
-
-   Quadrature Object     FPGA Quadrature     XLR8 Board Pins
-   ---------------------------------------------------
-    quadratures[0]    |     0          |      2 &  3
-    quadratures[1]    |     1          |      4 &  5
-    quadratures[2]    |     2          |      6 &  5
-    quadratures[3]    |     3          |      8 &  5
-    quadratures[4]    |     4          |     10 & 11
-    quadratures[5]    |     5          |     12 & 13
-
- Once you instantiate an quadrature object, the quadrature is enabled 
- by default. The software library then allows you to disable & 
- re-enable the quadratures, and read the count and rate values of the 
- quadrature. By default, the quadrature samples every 200ms to get the 
- rate, but can be set to sample every 20ms instead.
+ Functions:
+  XLR8Quadrature()
+    The class constructor, instantiates a quadrature.
+  disable()
+    Turns off the instance of quadrature until it is re-enabled. The 
+    quadrature will not increment count or rate while disabled. Does 
+    not return anything.
+  enable()
+    Turns on the instance of quadrature. Does not return anything.
+  reset()
+    Sets count and rate values for the quadrature back to zero. Does 
+    not return anything.
+  sample20ms()
+    Sets the quadrature to update every 20 milliseconds, so the "rate" 
+    value will correspond to number of pulses per 20 milliseconds. 
+    Does not return anything.
+  sample200ms()
+    Sets the quadrature to update every 200 milliseconds, so the 
+    "rate" value will correspond to number of pulses per 200 
+    milliseconds. This is the default sample speed. Does not return 
+    anything.
+  readCount()
+    Gets the current value of "count" from the quadrature, the number 
+    of pulses seen so far. Returns a signed 32 bit integer, with a 
+    positive number corresponding to forward motion and a negative 
+    number corresponding to reverse motion.
+  readRate()
+    Gets the current value of "rate" from the quadrature, the number 
+    of pulses seen during the defined sample period, either 20ms or 
+    200ms. Returns a signed 32 bit integer, with a positive number 
+    corresponding to forward motion and a negative number 
+    corresponding to reverse motion.
+  enabled()
+    Returns a value of true or false indicating whether the 
+    quadrature is currently enabled.
 
  This library is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as
@@ -86,8 +89,8 @@ class XLR8Quadrature {
     void reset();
     void sample20ms();
     void sample200ms();
-    int32_t read_count();
-    int32_t read_rate();
+    int32_t readCount();
+    int32_t readRate();
     bool enabled();
   private:
     uint8_t quadratureIndex;
