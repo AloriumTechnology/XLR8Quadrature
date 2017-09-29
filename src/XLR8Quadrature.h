@@ -38,7 +38,7 @@
   readRate()
     Gets the current value of "rate" from the quadrature, the number 
     of pulses seen during the defined sample period, either 20ms or 
-    200ms. Returns a signed 32 bit integer, with a positive number 
+    200ms. Returns a signed 16 bit integer, with a positive number 
     corresponding to forward motion and a negative number 
     corresponding to reverse motion.
   enabled()
@@ -90,7 +90,7 @@ class XLR8Quadrature {
     void sample20ms();
     void sample200ms();
     int32_t readCount();
-    int32_t readRate();
+    int16_t readRate();
     bool enabled();
   private:
     uint8_t quadratureIndex;

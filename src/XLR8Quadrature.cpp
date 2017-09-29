@@ -29,11 +29,8 @@
 #define QECNT0_ADDR _SFR_MEM8(0xe2) // LSBs of the quadrature count register
 #define QECNT1_ADDR _SFR_MEM8(0xe3) // Upper LSBs of the quadrature count register
 #define QECNT2_ADDR _SFR_MEM8(0xe4) // Lower MSBs of the quadrature count register
-#define QECNT3_ADDR _SFR_MEM8(0xe5) // MSBs of the quadrature count register
 #define QERAT0_ADDR _SFR_MEM8(0xe6) // LSBs of the quadrature rate register
 #define QERAT1_ADDR _SFR_MEM8(0xe7) // Upper LSBs of the quadrature rate register
-#define QERAT2_ADDR _SFR_MEM8(0xe8) // Lower MSBs of the quadrature rate register
-#define QERAT3_ADDR _SFR_MEM8(0xe9) // MSBs of the quadrature rate register
 
 #define QEEN  7 // Enable bit of the control register
 #define QEDIS 6 // Disable bit of the control register
@@ -87,16 +84,20 @@ void XLR8Quadrature::sample200ms() {
   this->update();
 }
 
-// Read the count registers and return as a 32 bit integer
+// Read the count registers and return as a 32 bit integer, extended from 24 bits of data
 int32_t XLR8Quadrature::readCount() {
   QECR_ADDR = 0x0F & this->quadratureIndex;
-  return (((uint32_t)(QECNT3_ADDR) << 24) | ((uint32_t)(QECNT2_ADDR) << 16) | ((uint32_t)(QECNT1_ADDR) << 8) | (uint32_t)(QECNT0_ADDR));
+  if ((QECNT2_ADDR >> 7) == 1) {
+    return (((uint32_t)(B11111111) << 24) | ((uint32_t)(QECNT2_ADDR) << 16) | ((uint32_t)(QECNT1_ADDR) << 8) | (uint32_t)(QECNT0_ADDR));
+  } else {
+    return (((uint32_t)(B00000000) << 24) | ((uint32_t)(QECNT2_ADDR) << 16) | ((uint32_t)(QECNT1_ADDR) << 8) | (uint32_t)(QECNT0_ADDR));
+  }
 }
 
-// Read the rate registers and return as a 32 bit integer
-int32_t XLR8Quadrature::readRate() {
+// Read the rate registers and return as a 16 bit integer
+int16_t XLR8Quadrature::readRate() {
   QECR_ADDR = 0x0F & this->quadratureIndex;
-  return (((uint32_t)(QERAT3_ADDR) << 24) | ((uint32_t)(QERAT2_ADDR) << 16) | ((uint32_t)(QERAT1_ADDR) << 8) | (uint32_t)(QERAT0_ADDR));
+  return (((uint32_t)(QERAT1_ADDR) << 8) | (uint32_t)(QERAT0_ADDR));
 }
 
 // Report whether the quadrature is enabled
