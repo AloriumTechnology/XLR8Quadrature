@@ -1,5 +1,5 @@
 /*--------------------------------------------------------------------
- Copyright (c) 2017 Alorim Technology.  All right reserved.
+ Copyright (c) 2017 Alorium Technology.  All right reserved.
  This file is part of the Alorium Technology XLR8 Quadrature library.
  Written by Bryan Craker (bryancraker.com) of
    Alorium Technology (info@aloriumtech.com).
@@ -87,10 +87,11 @@ void XLR8Quadrature::sample200ms() {
 // Read the count registers and return as a 32 bit integer, extended from 24 bits of data
 int32_t XLR8Quadrature::readCount() {
   QECR_ADDR = 0x0F & this->quadratureIndex;
-  if ((QECNT2_ADDR >> 7) == 1) {
-    return (((uint32_t)(B11111111) << 24) | ((uint32_t)(QECNT2_ADDR) << 16) | ((uint32_t)(QECNT1_ADDR) << 8) | (uint32_t)(QECNT0_ADDR));
+  uint8_t qecnt2 = QECNT2_ADDR;
+  if ((qecnt2 >> 7) == 1) {
+    return (((uint32_t)(B11111111) << 24) | ((uint32_t)(qecnt2) << 16) | ((uint32_t)(QECNT1_ADDR) << 8) | (uint32_t)(QECNT0_ADDR));
   } else {
-    return (((uint32_t)(B00000000) << 24) | ((uint32_t)(QECNT2_ADDR) << 16) | ((uint32_t)(QECNT1_ADDR) << 8) | (uint32_t)(QECNT0_ADDR));
+    return (((uint32_t)(B00000000) << 24) | ((uint32_t)(qecnt2) << 16) | ((uint32_t)(QECNT1_ADDR) << 8) | (uint32_t)(QECNT0_ADDR));
   }
 }
 

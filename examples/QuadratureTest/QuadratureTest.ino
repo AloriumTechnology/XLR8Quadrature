@@ -60,6 +60,7 @@ void setup() {
     for (long jdx = 0; jdx < NUM_TOGGLES + idx; jdx++) {
       digitalWrite(((idx + 1) * 2), LOW);
       digitalWrite(((idx + 1) * 2), HIGH);
+      delayMicroseconds(10);
     }
     fast_rates[idx] = quadratures[idx].readRate();
   }
