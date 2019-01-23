@@ -1,5 +1,5 @@
 # XLR8 Quadrature Encoder Library
-Quadrature Encoder control for use with the Quadrature Xcelerator Block on an XLR8 or Sn\u014d board.
+Quadrature Encoder control for use with the Quadrature Xcelerator Block on an XLR8 or Sno board.
 
 **Features:**
 
