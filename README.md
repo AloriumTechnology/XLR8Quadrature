@@ -30,8 +30,8 @@ You will have an array able to access the instantiated quadratures in the FPGA. 
    ---------------------------------------------------
     quadratures[0]    |     0          |      2 &  3
     quadratures[1]    |     1          |      4 &  5
-    quadratures[2]    |     2          |      6 &  5
-    quadratures[3]    |     3          |      8 &  5
+    quadratures[2]    |     2          |      6 &  7
+    quadratures[3]    |     3          |      8 &  9
     quadratures[4]    |     4          |     10 & 11
     quadratures[5]    |     5          |     12 & 13
 
