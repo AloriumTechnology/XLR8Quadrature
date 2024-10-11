@@ -1,5 +1,5 @@
 /*--------------------------------------------------------------------
- Copyright (c) 2017 Alorim Technology.  All right reserved.
+ Copyright (c) 2017 Alorium Technology.  All right reserved.
  This file is part of the Alorium Technology XLR8 Quadrature library.
  Written by Bryan Craker (bryancraker.com) of
    Alorium Technology (info@aloriumtech.com).
@@ -65,7 +65,8 @@
 
 #ifdef ARDUINO_XLR8
 
-#define MAX_QUADRATURES 6
+// #define MAX_QUADRATURES 6 // Original setting, for XLR8 with 10M08
+#define MAX_QUADRATURES 16 // Increased limit for bigger boards
 
 #define INVALID_QUADRATURE 255
 
